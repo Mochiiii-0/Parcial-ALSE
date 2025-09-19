@@ -61,23 +61,56 @@ double calcularDistanciaMasCercana(Point puntos[], int n, const Point &pUsuario,
     }
     return distanciaMinima;
 }
+
+// Función para mostrar el punto más cercano y la distancia
+void mostrarResultado(Point puntos[], int indiceMasCercano, double distancia)
+{
+    std::cout << "El punto más cercano es: (" << puntos[indiceMasCercano].x << ", " << puntos[indiceMasCercano].y << ")\n";
+    std::cout << "La distancia al punto más cercano es: " << distancia << std::endl;
+}
+
+// BONO: distancia total de los puntos recorridos en orden
+double distanciaTotal(Point puntos[], int n)
+{
+    double total = 0;
+    for (int i = 0; i < n - 1; i++)
+    {
+        total += calcularDistancia(puntos[i], puntos[i + 1]);
+    }
+    return total;
+}
+
 int main()
 {
-    const int n = 4;
-    Point puntos[n];
-    leerPuntos(puntos, n);
+    int n;
 
+    std::cout << "Ingrese el número de puntos (mínimo 2): ";
+    std::cin >> n;
+
+    if (n < 2)
+    {
+        std::cout << "Se necesitan al menos 2 puntos para calcular las distancias.\n";
+        return 1;
+    }
+
+    Point puntos[n];
+    // Leer los punntos (manual o predeterminado)
+    leerPuntos(puntos, n);
+    // Ingresar el punto del usuario
     Point pUsuario;
-    std::cout << "Ingrese las coordenadas del punto de usuario (x y): ";
+    std::cout << "Ingrese las coordenadas del punto desde el que calcular la distancia (x y): ";
     std::cin >> pUsuario.x >> pUsuario.y;
 
+    // Calcular la distancia más cercana
     int indiceMasCercano;
     double distancia = calcularDistanciaMasCercana(puntos, n, pUsuario, indiceMasCercano);
 
-    std::cout << "El punto más cercano está en (" 
-              << puntos[indiceMasCercano].x << ", " 
-              << puntos[indiceMasCercano].y << ") con distancia " 
-              << distancia << "\n";
+    // Mostrar el resultado
+    mostrarResultado(puntos, indiceMasCercano, distancia);
+
+
+    double total = distanciaTotal(puntos, n);
+    std::cout << "La distancia total recorrida al pasar por los puntos en orden es: " << total << std::endl;
 
     return 0;
 }
