@@ -47,4 +47,21 @@ else
     }
 }
 
+// Para hacer el calculo de la distancia más cercana desde un punto específico
+double calcularDistanciaMasCercana(Point puntos[], int n, const Point &pUsuario, int &indiceMasCercano)
+{
+    double distanciaMinima = calcularDistancia(pUsuario, puntos[0]);
+    indiceMasCercano = 0;
+
+    for (int i = 1; i < n; i++)
+    {
+        double d = calcularDistancia(pUsuario, puntos[i]);
+        if (d < distanciaMinima)
+        {
+            distanciaMinima = d;
+            indiceMasCercano = i;
+        }
+    }
+    return distanciaMinima;
+}
 
