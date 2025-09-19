@@ -17,6 +17,7 @@ double calcularDistancia(const Point &p1, const Point &p2)
 
 void leerPuntos(Point puntos[], int n)
 {
+    // ingresar los puntos manualmente por el usuario 
     char respuesta;
     std::cout << "¿Desea ingresar los puntos manualmente? (s/n): ";
     std::cin >> respuesta;
@@ -34,16 +35,16 @@ void leerPuntos(Point puntos[], int n)
 else
 {
     {
-        std::cout << "Usando puntos predeterminados...\n";
+        std::cout << "Vamos a utilizar los puntos predeterminados\n";
         if (n > 0) puntos[0] = {0, 0};
         if (n > 1) puntos[1] = {3, 4};
         if (n > 2) puntos[2] = {6, 8};
         if (n > 3) puntos[3] = {9, 12};
-        // El resto se inicializa en (0,0) para evitar basura
         for (int i = 4; i < n; i++)
         {
             puntos[i] = {0, 0};
         }
     }
 }
+
 
