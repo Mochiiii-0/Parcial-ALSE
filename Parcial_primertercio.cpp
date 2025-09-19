@@ -17,7 +17,6 @@ double calcularDistancia(const Point &p1, const Point &p2)
 
 void leerPuntos(Point puntos[], int n)
 {
-    // ingresar los puntos manualmente por el usuario 
     char respuesta;
     std::cout << "¿Desea ingresar los puntos manualmente? (s/n): ";
     std::cin >> respuesta;
@@ -30,10 +29,7 @@ void leerPuntos(Point puntos[], int n)
             std::cin >> puntos[i].x >> puntos[i].y;
         }
     }
-}
-
-else
-{
+    else   
     {
         std::cout << "Vamos a utilizar los puntos predeterminados\n";
         if (n > 0) puntos[0] = {0, 0};
@@ -46,6 +42,7 @@ else
         }
     }
 }
+
 
 // Para hacer el calculo de la distancia más cercana desde un punto específico
 double calcularDistanciaMasCercana(Point puntos[], int n, const Point &pUsuario, int &indiceMasCercano)
@@ -64,4 +61,23 @@ double calcularDistanciaMasCercana(Point puntos[], int n, const Point &pUsuario,
     }
     return distanciaMinima;
 }
+int main()
+{
+    const int n = 4;
+    Point puntos[n];
+    leerPuntos(puntos, n);
 
+    Point pUsuario;
+    std::cout << "Ingrese las coordenadas del punto de usuario (x y): ";
+    std::cin >> pUsuario.x >> pUsuario.y;
+
+    int indiceMasCercano;
+    double distancia = calcularDistanciaMasCercana(puntos, n, pUsuario, indiceMasCercano);
+
+    std::cout << "El punto más cercano está en (" 
+              << puntos[indiceMasCercano].x << ", " 
+              << puntos[indiceMasCercano].y << ") con distancia " 
+              << distancia << "\n";
+
+    return 0;
+}
